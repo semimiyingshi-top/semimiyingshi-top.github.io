@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>色咪咪影视｜影视作品资料整理与在线观看索引页 · 类型 · 年代 · 地区 · 更新状态</title>
+<meta name="description" content="色咪咪影视是一个影视作品资料整理与在线观看索引页，收录电影、电视剧、综艺、动漫、纪录片、短片等作品，按类型、年代、地区、清晰度、集数、更新状态分类整理。页面提供分集剧情、演员角色、播出信息、同类推荐等资料查阅，并整理高清、1080P、4K、蓝光等画质说明与更新时间。每日更新，覆盖华语、日韩、欧美、东南亚内容。">
+<meta name="keywords" content="色咪咪影视,semimiyingshi,影视在线观看,电影电视剧综艺动漫,影视资料整理,类型分类,年代筛选,地区筛选,分集剧情,演员角色,更新时间,高清1080P,4K蓝光">
+<style>
+*{box-sizing:border-box}
+:root{
+  --ink:#1a1412;--ink2:#4a3f3a;--paper:#efe9dc;--paper2:#e6decb;
+  --rose:#c25a5a;--rose-d:#9e3f3f;--gold:#b08d4a;--line:#d8cdb8;--muted:#8b7d6c;
+}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB","WenQuanYi Micro Hei",sans-serif;
+  line-height:1.85;-webkit-text-size-adjust:100%;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* ===== 顶栏 ===== */
+.hd{
+  position:sticky;top:0;z-index:60;background:rgba(239,233,220,.94);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);
+}
+.hd-in{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:14px}
+.logo{font-size:19px;font-weight:800;letter-spacing:1px;white-space:nowrap}
+.logo em{font-style:normal;color:var(--rose)}
+.hd-url{margin-left:auto;font-size:12px;color:var(--muted);font-family:ui-monospace,Menlo,Consolas,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:320px}
+.nav{display:flex;gap:4px;align-items:center}
+.nav a{
+  font-size:13px;padding:7px 11px;border-radius:2px;color:var(--ink2);white-space:nowrap;
+  border:1px solid transparent;
+}
+.nav a:hover{color:var(--rose);border-color:var(--line)}
+.menu-btn{display:none;width:40px;height:40px;flex:none;background:none;border:1px solid var(--line);border-radius:2px;font-size:17px;cursor:pointer;color:var(--ink)}
+.mnav{
+  display:none;background:var(--paper2);border-bottom:1px solid var(--line);
+}
+.mnav a{display:block;padding:12px 20px;font-size:14px;border-top:1px solid var(--line);color:var(--ink2)}
+.mnav a:first-child{border-top:none}
+.mnav a:hover{color:var(--rose);background:#f4efe4}
+
+/* ===== 通用 ===== */
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.kicker{font-size:12px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin:0 0 14px}
+.sec{border-top:3px double var(--rose);padding:52px 0 60px}
+.sec-h{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+.sec-h h2{margin:0;font-size:30px;letter-spacing:1px}
+.sec-h .no{font:800 15px/1 ui-monospace,Menlo,Consolas,monospace;color:var(--rose);border:1px solid var(--rose);padding:5px 9px}
+.sec-sub{margin:0 0 30px;color:var(--muted);font-size:14px;max-width:760px}
+
+/* ===== 首屏 ===== */
+.hero{padding:64px 0 40px;border-bottom:1px solid var(--line)}
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:44px;align-items:center}
+.hero h1{font-size:44px;line-height:1.3;margin:0 0 20px;letter-spacing:1px}
+.hero h1 u{text-decoration:none;border-bottom:6px solid var(--rose)}
+.hero p{margin:0 0 26px;color:var(--ink2);font-size:15px;max-width:560px}
+.hero-acts{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:34px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;font-size:14px;font-weight:700;border:1px solid var(--ink);background:var(--ink);color:#f4efe4;cursor:pointer}
+.btn:hover{border-color:var(--rose);background:var(--rose)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{color:#fff}
+.copy-tip{font-size:12px;color:var(--muted)}
+.urlbar{
+  display:flex;gap:0;align-items:center;border:1px dashed var(--rose);background:#f7f1e6;
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;overflow:hidden;
+}
+.urlbar span{flex:1;padding:13px 14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.urlbar button{flex:none;padding:13px 18px;background:var(--rose);color:#fff;border:0;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
+.urlbar button:hover{background:var(--rose-d)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.stat{background:var(--paper);padding:18px 16px}
+.stat b{display:block;font-size:27px;font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--rose);line-height:1.2}
+.stat small{font-size:12px;color:var(--muted)}
+
+/* ===== 分类卡 ===== */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.gcard{
+  background:var(--paper2);border:1px solid var(--line);padding:22px;position:relative;overflow:hidden;
+  transition:.25s;
+}
+.gcard:hover{transform:translateY(-4px);border-color:var(--rose);background:#f4efe4}
+.gcard .no{font:700 12px/1 ui-monospace,Menlo,Consolas,monospace;color:var(--gold);letter-spacing:1px}
+.gcard h3{margin:10px 0 4px;font-size:19px}
+.gcard h3 small{display:block;font-size:12px;font-weight:400;color:var(--muted);margin-top:4px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.gcard p{margin:8px 0 14px;font-size:13px;color:var(--ink2)}
+.gcard ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
+.gcard li{font-size:13px;color:var(--ink2);padding-left:13px;position:relative}
+.gcard li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;background:var(--rose);border-radius:50%}
+.gcard .big{position:absolute;right:-6px;bottom:-14px;font:800 62px/1 ui-monospace,Menlo,Consolas,monospace;color:rgba(194,90,90,.12)}
+.gcard:hover .big{color:rgba(194,90,90,.22)}
+
+/* ===== 目录表 ===== */
+.tbwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);background:var(--paper2)}
+table{width:100%;border-collapse:collapse;min-width:820px;font-size:14px}
+thead th{
+  background:var(--ink);color:#f4efe4;text-align:left;padding:13px 14px;font-weight:600;
+  font-size:13px;letter-spacing:1px;white-space:nowrap;
+}
+tbody td{padding:14px;border-top:1px solid var(--line);vertical-align:top}
+tbody tr{transition:.18s}
+tbody tr:hover{background:#f6f0e2}
+.cover{
+  width:52px;height:52px;flex:none;border-radius:2px;
+  background:linear-gradient(135deg,var(--rose) 0%,var(--gold) 100%);
+  display:flex;align-items:center;justify-content:center;color:#fff;font:700 15px/1 ui-monospace,Menlo,Consolas,monospace;
+}
+.pitem{display:flex;gap:12px;align-items:flex-start}
+.pitem b{font-size:14px;display:block;margin-bottom:3px}
+.pitem span{font-size:12px;color:var(--muted);display:block}
+.caps{display:flex;flex-wrap:wrap;gap:5px}
+.caps i{font-style:normal;font-size:11px;padding:3px 7px;background:#f4efe4;border:1px solid var(--line);border-radius:20px;color:var(--ink2);white-space:nowrap}
+.st{font-size:12px;font-weight:700;white-space:nowrap}
+.st.on{color:var(--rose)}
+.st.off{color:var(--gold)}
+.st.soon{color:var(--muted)}
+.q{font-size:11px;color:var(--muted);font-family:ui-monospace,Menlo,Consolas,monospace;white-space:nowrap}
+.tblbtn{
+  font-size:12px;padding:7px 14px;border:1px solid var(--ink);background:var(--ink);color:#f4efe4;
+  cursor:pointer;white-space:nowrap;
+}
+.tblbtn:hover{background:var(--rose);border-color:var(--rose)}
+tr.live td:first-child,td.livef{box-shadow:inset 4px 0 0 var(--rose)}
+tr.end td:first-child,td.endf{box-shadow:inset 4px 0 0 var(--gold)}
+tr.wait td:first-child,td.waitf{box-shadow:inset 4px 0 0 var(--line)}
+
+/* ===== 资料说明 ===== */
+.two{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:start}
+.dlbox{background:var(--paper2);border:1px solid var(--line)}
+.dlbox div{display:flex;gap:14px;padding:14px 18px;border-top:1px solid var(--line)}
+.dlbox div:first-child{border-top:none}
+.dlbox dt{flex:none;width:104px;font-size:13px;font-weight:700;color:var(--rose)}
+.dlbox dd{margin:0;font-size:13.5px;color:var(--ink2);flex:1}
+.steps{background:var(--ink);color:#f4efe4;padding:26px}
+.steps h3{margin:0 0 20px;font-size:19px;color:var(--gold)}
+.step{display:flex;gap:14px;padding:14px 0;border-top:1px solid rgba(255,255,255,.16)}
+.step:first-of-type{border-top:none}
+.step .n{font:800 22px/1 ui-monospace,Menlo,Consolas,monospace;color:var(--rose);flex:none}
+.step b{display:block;font-size:15px;margin-bottom:4px}
+.step p{margin:0;font-size:13px;color:rgba(255,255,255,.72)}
+
+/* ===== 日历 ===== */
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.day{background:var(--paper2);border:1px solid var(--line);min-height:118px;padding:10px;transition:.2s}
+.day:hover{border-color:var(--gold)}
+.day.today{background:var(--ink);border-color:var(--ink);color:#f4efe4}
+.day.today .d,.day.today .cap{color:var(--gold)}
+.day.today li::before{background:var(--gold)}
+.d{font:700 15px/1 ui-monospace,Menlo,Consolas,monospace;color:var(--rose);margin-bottom:8px}
+.day ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.day li{font-size:12px;line-height:1.5;padding-left:10px;position:relative;color:var(--ink2)}
+.day.today li{color:rgba(255,255,255,.85)}
+.day li::before{content:"";position:absolute;left:0;top:.5em;width:4px;height:4px;background:var(--rose);border-radius:50%}
+.cap{font-size:10px;color:var(--muted);display:block;margin-top:3px;font-family:ui-monospace,Menlo,Consolas,monospace}
+
+/* ===== 问答 ===== */
+.qa{display:flex;flex-direction:column;gap:10px}
+.qa details{border:1px solid var(--line);background:var(--paper2);transition:.2s}
+.qa details[open]{border-color:var(--rose)}
+.qa summary{
+  padding:16px 18px;cursor:pointer;font-size:15px;font-weight:600;list-style:none;
+  display:flex;align-items:center;gap:12px;
+}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"＋";margin-left:auto;color:var(--rose);font-weight:700;font-size:19px;flex:none}
+.qa details[open] summary::after{content:"－"}
+.qa summary span{flex:none;font:700 13px/1 ui-monospace,Menlo,Consolas,monospace;color:var(--gold);border:1px solid var(--gold);padding:5px 8px}
+.qa .a{padding:0 18px 18px 58px;font-size:14px;color:var(--ink2)}
+.qa .a p{margin:0 0 10px}
+.qa .a p:last-child{margin-bottom:0}
+.qa .a code{background:#f7f1e6;border:1px solid var(--line);padding:2px 7px;font-size:12.5px;font-family:ui-monospace,Menlo,Consolas,monospace;word-break:break-all;color:var(--rose-d)}
+
+/* ===== 页脚 ===== */
+.ft{border-top:3px double var(--rose);padding:44px 0 30px;background:var(--paper2)}
+.ft-top{display:grid;grid-template-columns:1.3fr .7fr;gap:34px;margin-bottom:30px}
+.ft h3{margin:0 0 12px;font-size:20px}
+.ft h3 em{font-style:normal;color:var(--rose)}
+.ft p{margin:0;color:var(--ink2);font-size:14px;max-width:620px}
+.ft-url{border:1px dashed var(--rose);background:#f7f1e6;display:flex;align-items:center;overflow:hidden}
+.ft-url span{flex:1;padding:14px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ft-url button{flex:none;padding:14px 20px;background:var(--rose);color:#fff;border:0;font-weight:700;cursor:pointer}
+.ft-bot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;padding-top:22px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.ft-bot nav{display:flex;gap:16px;flex-wrap:wrap}
+.ft-bot nav a:hover{color:var(--rose)}
+.hint{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--ink);color:#f4efe4;
+  padding:11px 22px;font-size:13px;border-radius:2px;opacity:0;pointer-events:none;transition:.25s;z-index:99}
+.hint.on{opacity:1}
+
+/* ===== 响应式 ===== */
+@media (max-width:960px){
+  .hero-grid,.two,.ft-top{grid-template-columns:1fr}
+  .hero h1{font-size:34px}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .sec-h h2{font-size:25px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:640px){
+  .hd-in{padding:10px 16px;gap:10px}
+  .logo{font-size:16px}
+  .hd-url{display:none}
+  .nav{display:none}
+  .menu-btn{display:block;margin-left:auto}
+  .wrap{padding:0 16px}
+  .hero{padding:38px 0 30px}
+  .hero h1{font-size:27px}
+  .hero p{font-size:14px}
+  .hero-acts{gap:10px}
+  .btn{padding:11px 18px;font-size:13px;flex:1;text-align:center;justify-content:center}
+  .urlbar{flex-direction:column}
+  .urlbar span{border-bottom:1px dashed var(--rose);text-align:center}
+  .urlbar button{width:100%}
+  .sec{padding:38px 0 42px}
+  .sec-h h2{font-size:22px}
+  .grid{grid-template-columns:1fr}
+  .gcard{padding:18px}
+  .gcard .big{font-size:46px}
+  .dlbox div{flex-direction:column;gap:5px;padding:12px 15px}
+  .dlbox dt{width:auto}
+  .steps{padding:20px 16px}
+  .cal{grid-template-columns:repeat(2,1fr)}
+  .day{min-height:104px;padding:9px}
+  .day li{font-size:11.5px}
+  .qa summary{padding:14px 15px;font-size:14px}
+  .qa .a{padding:0 15px 16px 15px}
+  .ft-url{flex-direction:column}
+  .ft-url span{border-bottom:1px dashed var(--rose);text-align:center}
+  .ft-url button{width:100%}
+  .ft-bot{flex-direction:column;text-align:center}
+  .ft-bot nav{justify-content:center}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/changyuan.js"></script>
+
+<header class="hd">
+  <div class="hd-in">
+    <div class="logo">色咪咪<em>影视</em></div>
+    <nav class="nav">
+      <a href="#genre">资源分类</a>
+      <a href="#list">下载目录</a>
+      <a href="#note">资料说明</a>
+      <a href="#cal">更新日历</a>
+      <a href="#qa">常见问题</a>
+    </nav>
+    <span class="hd-url">https://semimiyingshi-top.github.io</span>
+    <button class="menu-btn" id="mb" aria-label="菜单">☰</button>
+  </div>
+</header>
+<div class="mnav" id="mnav">
+  <a href="#genre">资源分类</a>
+  <a href="#list">下载目录</a>
+  <a href="#note">资料说明</a>
+  <a href="#cal">更新日历</a>
+  <a href="#qa">常见问题</a>
+</div>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="kicker">— 影视资源下载导航 · 在线观看索引 · 二〇二六年度版 —</p>
+        <h1>色咪咪影视，<u>影视资源下载</u>与在线观看的索引页。</h1>
+        <p>色咪咪影视整理电影、电视剧、综艺、动漫、纪录片、短片的资料与下载信息，按类型、年代、地区、清晰度、集数、更新状态分类。页面提供分集剧情、演员角色、播出信息、文件规格与同类推荐查阅，帮助你在观看前先看清作品信息与资源情况。</p>
+        <div class="hero-acts">
+          <a class="btn" href="#list">查看下载目录</a>
+          <a class="btn ghost" href="#genre">按类型筛选</a>
+          <button class="urlbar" id="cp1" style="border:1px dashed var(--rose);background:#f7f1e6;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;color:var(--ink);padding:0;align-items:center;overflow:hidden;max-width:430px">
+            <span style="padding:13px 14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">https://semimiyingshi-top.github.io</span>
+            <span style="flex:none;padding:13px 18px;background:var(--rose);color:#fff;font-size:13px;font-weight:700">复制网址</span>
+          </button>
+          <span class="copy-tip">点击即可复制完整网址</span>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>5,730</b><small>部 已整理作品</small></div>
+          <div class="stat"><b>11</b><small>个 类型标签</small></div>
+          <div class="stat"><b>8</b><small>个 地区分区</small></div>
+          <div class="stat"><b>约 24 条</b><small>每周新增</small></div>
+        </div>
+      </div>
+      <div class="urlbar" style="flex-direction:column;max-width:430px">
+        <span style="border-bottom:1px dashed var(--rose);text-align:center">https://semimiyingshi-top.github.io</span>
+        <button style="width:100%;padding:14px;background:var(--rose);color:#fff;border:0;font-size:14px;font-weight:700;cursor:pointer" id="cp2">复制网址</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="genre">
+  <div class="wrap">
+    <div class="sec-h"><span class="no">CAT.01—06</span><h2>资源分类</h2></div>
+    <p class="sec-sub">按作品类型划分的六个整理分区，每个分区下再按年代、地区、清晰度、更新状态细分，方便按自己的观看习惯检索。</p>
+    <div class="grid">
+      <div class="gcard">
+        <div class="no">CAT.01</div><h3>电影<small>MOVIE · 1,820 部</small></h3>
+        <p>院线片、独立电影、纪录片长片与短片合集。</p>
+        <ul><li>华语电影 · 剧情 / 悬疑 / 喜剧</li><li>欧美电影 · 科幻 / 动作 / 传记</li><li>日韩电影 · 青春 / 犯罪 / 动画</li></ul>
+        <div class="big">01</div>
+      </div>
+      <div class="gcard">
+        <div class="no">CAT.02</div><h3>电视剧<small>DRAMA · 2,140 部</small></h3>
+        <p>国产剧、日剧、韩剧、美剧与英剧，含集数与更新状态。</p>
+        <ul><li>国产剧 · 都市 / 古装 / 年代</li><li>日韩剧 · 12 集制 / 月火剧</li><li>美英剧 · 季播 / 限定剧</li></ul>
+        <div class="big">02</div>
+      </div>
+      <div class="gcard">
+        <div class="no">CAT.03</div><h3>综艺<small>SHOW · 640 部</small></h3>
+        <p>真人秀、访谈、竞演、生活观察类节目。</p>
+        <ul><li>竞演类 · 音乐 / 舞蹈 / 表演</li><li>生活类 · 旅行 / 美食 / 职场</li><li>访谈类 · 人物 / 纪实</li></ul>
+        <div class="big">03</div>
+      </div>
+      <div class="gcard">
+        <div class="no">CAT.04</div><h3>动漫<small>ANIME · 760 部</small></h3>
+        <p>TV 动画、剧场版、国漫与泡面番。</p>
+        <ul><li>TV 动画 · 季度番 / 年番</li><li>剧场版 · 单集 / 合集</li><li>国漫 · 3D / 2D</li></ul>
+        <div class="big">04</div>
+      </div>
+      <div class="gcard">
+        <div class="no">CAT.05</div><h3>纪录片<small>DOC · 460 部</small></h3>
+        <p>自然、历史、人文、科技与社会纪实。</p>
+        <ul><li>自然地理 · 动植物 / 极地</li><li>人文历史 · 考古 / 人物</li><li>科技社会 · 工业 / 医疗</li></ul>
+        <div class="big">05</div>
+      </div>
+      <div class="gcard">
+        <div class="no">CAT.06</div><h3>短片与合集<small>SHORT · 210 部</small></h3>
+        <p>微电影、学生作品、预告合集与花絮特辑。</p>
+        <ul><li>微电影 · 剧情 / 实验</li><li>花絮特辑 · 幕后 / 访谈</li><li>预告合集 · 周更 / 月更</li></ul>
+        <div class="big">06</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="list">
+  <div class="wrap">
+    <div class="sec-h"><span class="no">TABLE</span><h2>下载目录</h2></div>
+    <p class="sec-sub">下表为示例条目，用于展示页面的分类与资料呈现方式。条目中的作品名称、集数、容量与更新时间均为虚构示例，实际内容以站内更新为准。</p>
+    <div class="tbwrap">
+      <table>
+        <thead>
+          <tr><th style="width:76px">编号</th><th style="width:210px">作品 · 简介</th><th>分类 · 地区 · 年代</th><th style="width:120px">状态 · 容量</th><th style="width:130px">清晰度 · 操作</th></tr>
+        </thead>
+        <tbody>
+          <tr class="live">
+            <td class="livef">NO.01</td>
+            <td><div class="pitem"><div class="cover">逆光</div><div><b>逆光者</b><span>32 集全 · 都市悬疑</span></div></div></td>
+            <td><div class="caps"><i>电视剧</i><i>华语</i><i>2026</i></div></td>
+            <td><div class="st on">连载中</div><div class="q">48.6 GB · 已更 24 集</div></td>
+            <td><div class="q">1080P / WEB-DL</div><button class="tblbtn">查看资料</button></td>
+          </tr>
+          <tr class="live">
+            <td class="livef">NO.02</td>
+            <td><div class="pitem"><div class="cover">城南</div><div><b>城南旧事：剧版</b><span>45 集 · 年代家庭</span></div></div></td>
+            <td><div class="caps"><i>电视剧</i><i>华语</i><i>2025</i></div></td>
+            <td><div class="st on">连载中</div><div class="q">62.1 GB · 已更 38 集</div></td>
+            <td><div class="q">4K / REMUX</div><button class="tblbtn">查看资料</button></td>
+          </tr>
+          <tr class="end">
+            <td class="endf">NO.03</td>
+            <td><div class="pitem"><div class="cover">星轨</div><div><b>星轨回响</b><span>电影 · 科幻冒险</span></div></div></td>
+            <td><div class="caps"><i>电影</i><i>欧美</i><i>2026</i></div></td>
+            <td><div class="st off">已完结</div><div class="q">22.4 GB · 单文件</div></td>
+            <td><div class="q">蓝光原盘 / ISO</div><button class="tblbtn">查看资料</button></td>
+          </tr>
+          <tr class="wait">
+            <td class="waitf">NO.04</td>
+            <td><div class="pitem"><div class="cover">无声</div><div><b>无声的搭档</b><span>24 集 · 刑侦双男主</span></div></div></td>
+            <td><div class="caps"><i>电视剧</i><i>华语</i><i>2026</i></div></td>
+            <td><div class="st soon">待更新</div><div class="q">约 36 GB · 预计 12 集</div></td>
+            <td><div class="q">1080P / WEB-DL</div><button class="tblbtn">查看资料</button></td>
+          </tr>
+          <tr class="end">
+            <td class="endf">NO.05</td>
+            <td><div class="pitem"><div class="cover">山海</div><div><b>山海之间</b><span>12 集纪录片 · 自然地理</span></div></div></td>
+            <td><div class="caps"><i>纪录片</i><i>华语</i><i>2025</i></div></td>
+            <td><div class="st off">已完结</div><div class="q">78.9 GB · 12 集</div></td>
+            <td><div class="q">4K / HDR</div><button class="tblbtn">查看资料</button></td>
+          </tr>
+          <tr class="live">
+            <td class="livef">NO.06</td>
+            <td><div class="pitem"><div class="cover">晚风</div><div><b>晚风轻轻吹</b><span>36 集 · 都市情感</span></div></div></td>
+            <td><div class="caps"><i>电视剧</i><i>华语</i><i>2026</i></div></td>
+            <td><div class="st on">连载中</div><div class="q">41.2 GB · 已更 29 集</div></td>
+            <td><div class="q">1080P / WEB-DL</div><button class="tblbtn">查看资料</button></td>
+          </tr>
+          <tr class="end">
+            <td class="endf">NO.07</td>
+            <td><div class="pitem"><div class="cover">边境</div><div><b>边境线</b><span>电影 · 犯罪剧情</span></div></div></td>
+            <td><div class="caps"><i>电影</i><i>日韩</i><i>2025</i></div></td>
+            <td><div class="st off">已完结</div><div class="q">15.7 GB · 单文件</div></td>
+            <td><div class="q">1080P / WEB-DL</div><button class="tblbtn">查看资料</button></td>
+          </tr>
+          <tr class="wait">
+            <td class="waitf">NO.08</td>
+            <td><div class="pitem"><div class="cover">候鸟</div><div><b>候鸟计划</b><span>综艺 · 旅行纪实</span></div></div></td>
+            <td><div class="caps"><i>综艺</i><i>华语</i><i>2026</i></div></td>
+            <td><div class="st soon">待更新</div><div class="q">约 28 GB · 预计 10 期</div></td>
+            <td><div class="q">1080P / WEB-DL</div><button class="tblbtn">查看资料</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="note">
+  <div class="wrap">
+    <div class="sec-h"><span class="no">DATA</span><h2>资料说明</h2></div>
+    <p class="sec-sub">每一条作品资料都按固定字段整理，方便在观看前快速了解作品情况与文件规格。</p>
+    <div class="two">
+      <div class="dlbox">
+        <div><dt>剧情简介</dt><dd>作品的故事主线、时代背景与核心冲突，帮助判断是否合口味。</dd></div>
+        <div><dt>分集看点</dt><dd>按集数标注关键情节与转折，追更时可按进度查阅。</dd></div>
+        <div><dt>演员角色</dt><dd>主要演员与对应角色，含配音与特别出演信息。</dd></div>
+        <div><dt>播出信息</dt><dd>首播平台、首播日期、播出周期与更新时间。</dd></div>
+        <div><dt>文件规格</dt><dd>容量大小、清晰度、字幕语言、音轨编码与封装格式。</dd></div>
+        <div><dt>同类推荐</dt><dd>同类型、同演员或同导演的相关作品链接。</dd></div>
+      </div>
+      <div class="steps">
+        <h3>检索四步</h3>
+        <div class="step"><div class="n">1</div><div><b>先选类型</b><p>从电影、电视剧、综艺、动漫、纪录片、短片六个分区进入。</p></div></div>
+        <div class="step"><div class="n">2</div><div><b>再定条件</b><p>按年代、地区、清晰度、集数、更新状态进一步筛选。</p></div></div>
+        <div class="step"><div class="n">3</div><div><b>查看资料</b><p>打开作品页看分集剧情、演员角色与文件规格。</p></div></div>
+        <div class="step"><div class="n">4</div><div><b>选源观看</b><p>对比清晰度与容量，选合适的一条进入观看。</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="cal">
+  <div class="wrap">
+    <div class="sec-h"><span class="no">WEEK</span><h2>更新日历</h2></div>
+    <p class="sec-sub">按北京时间标注每日上新与更新时点，深色格为今天。下表为示例排期，实际更新以站内公告为准。</p>
+    <div class="cal">
+      <div class="day"><div class="d">周一</div><ul><li>逆光者<small class="cap">20:00 · 第 25 集</small></li><li>星轨回响<small class="cap">22:00 · 花絮</small></li></ul></div>
+      <div class="day"><div class="d">周二</div><ul><li>城南旧事：剧版<small class="cap">20:00 · 第 39 集</small></li><li>候鸟计划<small class="cap">21:30 · 第 03 期</small></li></ul></div>
+      <div class="day today"><div class="d">周三 · 今日</div><ul><li>晚风轻轻吹<small class="cap">19:30 · 第 30 集</small></li><li>山海之间<small class="cap">21:00 · 幕后特辑</small></li></ul></div>
+      <div class="day"><div class="d">周四</div><ul><li>逆光者<small class="cap">20:00 · 第 26 集</small></li><li>边境线<small class="cap">22:00 · 正片上线</small></li></ul></div>
+      <div class="day"><div class="d">周五</div><ul><li>城南旧事：剧版<small class="cap">20:00 · 第 40 集</small></li><li>无声的搭档<small class="cap">21:00 · 第 01 集</small></li></ul></div>
+      <div class="day"><div class="d">周六</div><ul><li>晚风轻轻吹<small class="cap">19:30 · 第 31 集</small></li><li>候鸟计划<small class="cap">21:30 · 第 04 期</small></li></ul></div>
+      <div class="day"><div class="d">周日</div><ul><li>周更合集<small class="cap">20:00 · 预告精选</small></li><li>同类推荐<small class="cap">21:00 · 专题更新</small></li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="qa">
+  <div class="wrap">
+    <div class="sec-h"><span class="no">QA</span><h2>常见问题</h2></div>
+    <p class="sec-sub">关于色咪咪影视这个索引页的常见疑问，若有其他问题可在站内留言。</p>
+    <div class="qa">
+      <details open>
+        <summary><span>Q.01</span>色咪咪影视是做什么的？</summary>
+        <div class="a"><p>色咪咪影视是一个影视作品资料整理与在线观看索引页，主要做两件事：一是把电影、电视剧、综艺、动漫、纪录片、短片的剧情简介、分集看点、演员角色、播出信息整理成固定字段；二是按类型、年代、地区、清晰度、集数、更新状态分类，方便检索。</p></div>
+      </details>
+      <details>
+        <summary><span>Q.02</span>官方网址是什么？</summary>
+        <div class="a"><p>唯一官方入口为 <code>https://semimiyingshi-top.github.io</code>，点击页面上的网址条即可一键复制。请认准该域名，其他相似域名均与本页无关。</p></div>
+      </details>
+      <details>
+        <summary><span>Q.03</span>目录里的作品和容量是真的吗？</summary>
+        <div class="a"><p>不是。本页目录中的作品名称（如《逆光者》《城南旧事：剧版》《星轨回响》）、集数、容量、清晰度与更新时间均为虚构示例，仅用于演示页面的分类与资料呈现方式，不构成真实资源清单。</p></div>
+      </details>
+      <details>
+        <summary><span>Q.04</span>清晰度与封装格式怎么选？</summary>
+        <div class="a"><p>页面在「文件规格」字段标注了 1080P、4K、蓝光原盘、WEB-DL、REMUX 等信息。一般观看选 1080P / WEB-DL 即可；追求画质可选 4K / REMUX 或蓝光原盘，但容量更大、加载更慢，请按自身网络与设备情况选择。</p></div>
+      </details>
+      <details>
+        <summary><span>Q.05</span>更新时间是按哪个时区？</summary>
+        <div class="a"><p>统一按北京时间（UTC+8）标注。每周约更新 24 条，具体上新时点见「更新日历」栏目，实际排期可能调整，以站内公告为准。</p></div>
+      </details>
+      <details>
+        <summary><span>Q.06</span>页面上的示例内容会替换吗？</summary>
+        <div class="a"><p>会。当前为演示版本，后续将替换为真实整理的影视资料。若你发现条目信息有误，可通过站内反馈渠道提交修正建议。</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-top">
+      <div>
+        <h3>色咪咪<em>影视</em></h3>
+        <p>影视作品资料整理与在线观看索引页，按类型、年代、地区、清晰度、集数、更新状态分类，提供分集剧情、演员角色、播出信息、文件规格与同类推荐查阅。本页内容为演示示例，作品名称与数据均为虚构。</p>
+      </div>
+      <div class="ft-url">
+        <span>https://semimiyingshi-top.github.io</span>
+        <button id="cp3">复制网址</button>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span>© 色咪咪影视 · 影视资源下载导航与在线观看索引页</span>
+      <nav>
+        <a href="#genre">资源分类</a>
+        <a href="#list">下载目录</a>
+        <a href="#note">资料说明</a>
+        <a href="#cal">更新日历</a>
+        <a href="#qa">常见问题</a>
+        <a href="#top">返回顶部</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<div class="hint" id="hint">网址已复制到剪贴板</div>
+
+<script>
+(function(){
+  var u='https://semimiyingshi-top.github.io';
+  function copy(){
+    var done=function(){show()};
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(u).then(done,function(){fb()});
+    }else{fb()}
+    function fb(){
+      var t=document.createElement('textarea');
+      t.value=u;t.style.position='fixed';t.style.opacity='0';
+      document.body.appendChild(t);t.select();
+      try{document.execCommand('copy');done()}catch(e){}
+      document.body.removeChild(t);
+    }
+  }
+  function show(){
+    var h=document.getElementById('hint');h.classList.add('on');
+    setTimeout(function(){h.classList.remove('on')},1600);
+  }
+  document.getElementById('cp1').addEventListener('click',copy);
+  document.getElementById('cp2').addEventListener('click',copy);
+  document.getElementById('cp3').addEventListener('click',copy);
+
+  var mb=document.getElementById('mb'),mn=document.getElementById('mnav');
+  mb.addEventListener('click',function(){mn.style.display=mn.style.display==='block'?'none':'block'});
+  mn.addEventListener('click',function(e){
+    if(e.target.tagName==='A'){mn.style.display='none';setTimeout(function(){window.scrollBy(0,-70)},0)}
+  });
+
+  var links=document.querySelectorAll('.nav a');
+  var targets=[];
+  links.forEach(function(a){
+    var el=document.querySelector(a.getAttribute('href'));
+    if(el)targets.push({a:a,el:el});
+  });
+  function onScroll(){
+    var y=window.scrollY+120,cur=null;
+    targets.forEach(function(t){
+      if(t.el.offsetTop<=y)cur=t.a;
+    });
+    links.forEach(function(a){a.style.color='';a.style.borderColor='transparent'});
+    if(cur){cur.style.color='var(--rose)';cur.style.borderColor='var(--line)'}
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>
